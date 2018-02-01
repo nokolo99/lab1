@@ -143,7 +143,7 @@ let exercise5b : string =
 let exercise5c : int  =
   fun (x, y) -> x + int_of_float y ;;
 
-let exercise5d : bool =
+let exercise5d : fun =
   fun x -> x < x + 1 ;;
 
 let exercise5e : list =
