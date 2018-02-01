@@ -140,7 +140,7 @@ let exercise5b : string =
   let greet y = "Hello " ^ y
   in greet "World!";;
 
-let exercise5c : fun  =
+let exercise5c : int -> float -> int  =
   fun (x, y) -> x + int_of_float y ;;
 
 let exercise5d : bool =
