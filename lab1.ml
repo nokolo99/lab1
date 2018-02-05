@@ -257,7 +257,7 @@ let rec dotprod (a : int list) (b : int list) : int =
   match a, b with
   | [], [] -> 0
   | [], _ | _, [] -> raise(Invalid_argument "mismatched lists")
-  | h1::t1. h2::t2 -> (h1 *h2) + dotprod t1 t2
+  | h1::t1 h2::t2 -> (h1 *h2) + dotprod t1 t2
 
 (*======================================================================
 Part 4: High-order functional programming with map, filter, and fold
