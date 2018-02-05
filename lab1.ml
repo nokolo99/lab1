@@ -251,7 +251,7 @@ let rec prods (lst : (int * int) list) : int list =
   | (x, y) :: tail -> (x * y) :: (prods tail) ;;
 
 let rec dotprod (a : int list) (b : int list) : int =
-  sum prods (zip a b);;
+  sum (prods (zip a b));;
 
 let rec dotprod (a : int list) (b : int list) : int =
   match a, b with
