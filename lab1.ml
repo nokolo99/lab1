@@ -99,7 +99,7 @@ appropriate OCaml expression to assign the value to the variable
 exercise1 below.
 ......................................................................*)
 
-let exercise3 () = 3 - 5 ;;
+let exercise3 () = - (5 - 3) ;;
 
 (* Hint: The OCaml concrete expression
 
@@ -177,9 +177,9 @@ to the list containing the elements 3, 4, and 5? You'll want to
 replace the "[]" with the correct functional call.
 ......................................................................*)
 
-let rec square_all l =
-  match l with
-    [] -> []
+let rec square_all (lst : int list) : int list =
+  match lst with
+  | [] -> []
   | h :: t -> (h * h) :: square_all t;;
 
 let exercise6 = square_all [3;4;5] ;;
@@ -201,8 +201,13 @@ can raise an appropriate exception -- a Match_failure or
 Invalid_argument exception for instance.
 ......................................................................*)
 
-let max_list (lst : int list) : int =
-  failwith "max_list not implemented" ;;
+exception No
+
+let rec max_list (lst : int list) : int =
+  match lst with
+  | h :: [] -> h
+  | h :: t -> if h > max_list t then h else max_list t 
+  | [] -> raise No ;;
 
 (*......................................................................
 Exercise 9: Define a function zip, that takes two int lists and
@@ -252,12 +257,6 @@ let rec prods (lst : (int * int) list) : int list =
 
 let rec dotprod (a : int list) (b : int list) : int =
   sum (prods (zip a b));;
-
-let rec dotprod (a : int list) (b : int list) : int =
-  match a, b with
-  | [], [] -> 0
-  | [], _ | _, [] -> raise(Invalid_argument "mismatched lists")
-  | h1::t1, h2::t2 -> (h1 *h2) + dotprod t1 t2
 
 (*======================================================================
 Part 4: High-order functional programming with map, filter, and fold
@@ -317,8 +316,6 @@ Exercise 11: Reimplement sum using fold_left, naming it sum_ho (for
 let sum_ho (lst : int list) : int =
   List.fold_left (+) 0 lst;;
 
-let sum_ho =
-	List.fold_left (+) 0 ;;
 
 (*......................................................................
 Exercise 12: Reimplement prods using map.
@@ -326,9 +323,6 @@ Exercise 12: Reimplement prods using map.
 
 let prods_ho (lst : (int * int) list) : int list =
   List.map (fun (x,y) -> x * y) lst;;
-
-let prods_ho =
-  List.map (fun (x,y) -> x * y);;
 
   
 (*......................................................................
@@ -349,6 +343,5 @@ functional programming techniques, that returns a list of all of the
 even numbers in its argument list.
 ......................................................................*)
    
-let evens : int list -> int list =
-  List.fold_left (fun x y -> if y mod 2 = 0 then x @ [y] else x) []
-  List.filter (fun x -> x mod 2 = 0)
+let evens (lst : int list) : int list =
+  List.filter (fun x -> x mod 2 = 0) lst;;
