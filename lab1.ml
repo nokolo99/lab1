@@ -205,7 +205,7 @@ let rec max_list (lst : int list) : int =
   match lst with
   | h :: [] -> h
   | h :: t -> if h > max_list t then h else max_list t 
-  | [] -> raise (failwith "invalid argument") ;;
+  | [] -> raise (Invalid_argument "mismatched lists") ;;
 
 (*......................................................................
 Exercise 9: Define a function zip, that takes two int lists and
@@ -224,7 +224,7 @@ let rec zip (x : int list) (y : int list) : (int * int) list =
     match x, y with
     | (h1 :: t1), (h2 :: t2) -> (h1, h2) :: zip t1 t2 
     | _, _ -> []
-  else raise (failwith "unequal list lengths") ;;
+  else raise (Invalid_argument "unequal list lengths") ;;
 
 (*.....................................................................
 Exercise 10: Recall the definition of the function prods from lecture
